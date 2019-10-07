@@ -180,31 +180,31 @@ public class SimulationLevel {
                 if(currentAngle >= 270) {
                     finalY = -opp;
                     finalX = -adj;
-                    if(currentAngle > 270) {
-                        finalX = finalX - currentTurret.component.width/2;
-                        finalY = finalY + currentTurret.component.height/2;
-                    }
+//                    if(currentAngle > 270) {
+//                        finalX = finalX - currentTurret.component.width/2;
+//                        finalY = finalY + currentTurret.component.height/2;
+//                    }
                 } else if (currentAngle >= 180) {
                     finalY = adj;
                     finalX = -opp;
-                    if(currentAngle > 180) {
-                        finalX = finalX + currentTurret.component.width/2;
-                        finalY = finalY + currentTurret.component.height/2;
-                    }
+//                    if(currentAngle > 180) {
+//                        finalX = finalX + currentTurret.component.width/2;
+//                        finalY = finalY + currentTurret.component.height/2;
+//                    }
                 } else if (currentAngle >= 90) {
                     finalY = opp;
                     finalX = adj;
-                    if(currentAngle > 90) {
-                        finalX = finalX + currentTurret.component.width/2;
-                        finalY = finalY - currentTurret.component.height/2;
-                    }
+//                    if(currentAngle > 90) {
+//                        finalX = finalX + currentTurret.component.width/2;
+//                        finalY = finalY - currentTurret.component.height/2;
+//                    }
                 } else {
                     finalY = -adj;
                     finalX = opp;
-                    if(currentAngle > 0) {
-                        finalX = finalX - currentTurret.component.width/2;
-                        finalY = finalY - currentTurret.component.height/2;
-                    }
+//                    if(currentAngle > 0) {
+//                        finalX = finalX - currentTurret.component.width/2;
+//                        finalY = finalY - currentTurret.component.height/2;
+//                    }
                 }
                 System.out.println("Final x " + finalX + " final y" + finalY);
                 currentTurret.component.yPos = (currentPanelHeight - this.base.component.height)/2 + finalY;
