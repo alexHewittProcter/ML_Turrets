@@ -7,6 +7,7 @@ import java.awt.*;
 
 public class Enemy extends Actor{
     public int posXFromBase,posYFromBase;
+    public int movementPerLoop = 1;
     public Enemy(){
         this.size = 50;
         this.component = new VisualComponent();

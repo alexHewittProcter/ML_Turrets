@@ -51,10 +51,27 @@ public class SimulationLevel {
         if(this.enemyDelay == 0) {
 //            System.out.println("Running loop");
             //Move all enemies
+            for (int i = 0; i < this.enemies.size(); i++) {
+                Enemy currentEnemy = this.enemies.get(i);
+                //Calculate new x
+                if(currentEnemy.posXFromBase < 0) {
+                    currentEnemy.posXFromBase = currentEnemy.posXFromBase + currentEnemy.movementPerLoop;
+                } else if (currentEnemy.posXFromBase > 0) {
+                    currentEnemy.posXFromBase = currentEnemy.posXFromBase - currentEnemy.movementPerLoop;
+                }
+                currentEnemy.component.xPos = this.base.component.xPos + currentEnemy.posXFromBase;
+                //Calculate new y
+                if(currentEnemy.posYFromBase < 0) {
+                    currentEnemy.posYFromBase = currentEnemy.posYFromBase + currentEnemy.movementPerLoop;
+                } else if(currentEnemy.posYFromBase > 0) {
+                    currentEnemy.posYFromBase = currentEnemy.posYFromBase - currentEnemy.movementPerLoop;
+                }
+                currentEnemy.component.yPos = this.base.component.yPos + currentEnemy.posYFromBase;
+            }
             //Generate new enemies
             if(this.enemyCreateBuffer == this.currentEnemyCreateBuffer && this.enemiesToCreate > 0) {
                 this.currentEnemyCreateBuffer = 0;
-                System.out.println("Generate enemies " + this.enemiesToCreate);
+//                System.out.println("Generate enemies " + this.enemiesToCreate);
                 Enemy newEnemy;
                 double genDegree;
                 double finalGenDegree;
@@ -144,9 +161,9 @@ public class SimulationLevel {
     }
 
     public void positionTurrets() {
-        System.out.println(Math.sin(Math.toRadians(30)));
-        System.out.println("Base x " + this.base.component.xPos + " y " + this.base.component.yPos);
-        System.out.println("Turrent distance " + this.turretDistance);
+//        System.out.println(Math.sin(Math.toRadians(30)));
+//        System.out.println("Base x " + this.base.component.xPos + " y " + this.base.component.yPos);
+//        System.out.println("Turrent distance " + this.turretDistance);
         int currentPanelWidth = this.trainingSimulator.mainFrame.painter.getWidth();
         int currentPanelHeight = this.trainingSimulator.mainFrame.painter.getHeight();
         if(this.turrets.size() == 1) {
@@ -155,14 +172,14 @@ public class SimulationLevel {
             turret.component.yPos = (currentPanelHeight - turret.component.height) / 2;
         } else {
             double angleIncrement = 360.00 / this.turrets.size();
-            System.out.println("Angle increment " + angleIncrement);
+//            System.out.println("Angle increment " + angleIncrement);
             double currentAngle,finalAngle;
             int opp,adj,finalX,finalY;
             for (int i = 0; i < this.turrets.size(); i++) {
                 Turret currentTurret = this.turrets.get(i);
                 currentAngle = angleIncrement * i;
                 System.out.println("");
-                System.out.println("Current angle " + currentAngle);
+//                System.out.println("Current angle " + currentAngle);
                 if(currentAngle >= 270) {
                     finalAngle = currentAngle - 270;
                 } else if(currentAngle >= 180) {
@@ -172,44 +189,28 @@ public class SimulationLevel {
                 } else {
                     finalAngle = currentAngle;
                 }
-                System.out.println("sin " + Math.sin(Math.toRadians(finalAngle)) + " finalAngle" + finalAngle);
-                System.out.println("cos " + Math.cos(Math.toRadians(finalAngle)) + " finalAngle" + finalAngle);
+//                System.out.println("sin " + Math.sin(Math.toRadians(finalAngle)) + " finalAngle" + finalAngle);
+//                System.out.println("cos " + Math.cos(Math.toRadians(finalAngle)) + " finalAngle" + finalAngle);
                 opp = (int)(Math.sin(Math.toRadians(finalAngle)) * this.turretDistance);
                 adj = (int)(Math.cos(Math.toRadians(finalAngle)) * this.turretDistance);
-                System.out.println("Opp" + opp + " adj " + adj);
+//                System.out.println("Opp" + opp + " adj " + adj);
                 if(currentAngle >= 270) {
                     finalY = -opp;
                     finalX = -adj;
-//                    if(currentAngle > 270) {
-//                        finalX = finalX - currentTurret.component.width/2;
-//                        finalY = finalY + currentTurret.component.height/2;
-//                    }
                 } else if (currentAngle >= 180) {
                     finalY = adj;
                     finalX = -opp;
-//                    if(currentAngle > 180) {
-//                        finalX = finalX + currentTurret.component.width/2;
-//                        finalY = finalY + currentTurret.component.height/2;
-//                    }
                 } else if (currentAngle >= 90) {
                     finalY = opp;
                     finalX = adj;
-//                    if(currentAngle > 90) {
-//                        finalX = finalX + currentTurret.component.width/2;
-//                        finalY = finalY - currentTurret.component.height/2;
-//                    }
                 } else {
                     finalY = -adj;
                     finalX = opp;
-//                    if(currentAngle > 0) {
-//                        finalX = finalX - currentTurret.component.width/2;
-//                        finalY = finalY - currentTurret.component.height/2;
-//                    }
                 }
-                System.out.println("Final x " + finalX + " final y" + finalY);
+//                System.out.println("Final x " + finalX + " final y" + finalY);
                 currentTurret.component.yPos = (currentPanelHeight - this.base.component.height)/2 + finalY;
                 currentTurret.component.xPos = (currentPanelWidth  - this.base.component.width)/2 + finalX;
-                System.out.println("Xpos " + currentTurret.component.xPos + " Ypos " + currentTurret.component.yPos);
+//                System.out.println("Xpos " + currentTurret.component.xPos + " Ypos " + currentTurret.component.yPos);
             }
         }
     }
