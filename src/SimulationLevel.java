@@ -118,6 +118,7 @@ public class SimulationLevel {
                 this.currentEnemyCreateBuffer++;
             }
             //Get all actions from
+            
         } else {
 //            System.out.println("Enemy delays");
             this.enemyDelay--;
