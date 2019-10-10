@@ -55,7 +55,9 @@ public class SimulatorPainter extends JPanel {
         }
         //Print Enemies
         for (int i = 0; i < currentLevel.enemies.size(); i++) {
-            this.paintActor(currentLevel.enemies.get(i),g);
+            if(currentLevel.enemies.get(i).health > 0) {
+                this.paintActor(currentLevel.enemies.get(i),g);
+            }
         }
         //Print text data
     }

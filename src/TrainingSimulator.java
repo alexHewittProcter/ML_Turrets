@@ -7,7 +7,7 @@ public class TrainingSimulator {
     public final MainFrame mainFrame;
     public boolean levelRunning = false;
     public SimulationLevel currentLevel = null;
-    public int levelNumber = 1;
+    public int levelNumber = 2;
     private int levelNumberScreenTime = 24 * 5;
 
     public TrainingSimulator(MainFrame mainFrame) {

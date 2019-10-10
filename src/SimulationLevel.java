@@ -118,7 +118,30 @@ public class SimulationLevel {
                 this.currentEnemyCreateBuffer++;
             }
             //Get all actions from
-
+            Enemy currentEnemy;
+            int currentDistance;
+            for (int i = 0; i < this.turrets.size(); i++) {
+                Turret currentTurret = this.turrets.get(i);
+                int closestDistance = currentTurret.range + 1;
+                Enemy closestEnemy = null;
+                for (int j = 0; j < this.enemies.size(); j++) {
+                    currentEnemy = this.enemies.get(j);
+                    if(currentEnemy.health > 0) {
+                        currentDistance = this.getDistanceBetween(currentEnemy.component.xPos, currentEnemy.component.yPos, currentTurret.component.xPos, currentTurret.component.yPos);
+                        if (closestDistance > currentDistance) {
+                            closestEnemy = currentEnemy;
+                            closestDistance = currentDistance;
+                        }
+                    }
+                }
+                if(closestEnemy != null) {
+                    closestEnemy.takeDamage(currentTurret.damage);
+//                    System.out.println("Enemy " + closestEnemy.health);
+                    if(closestEnemy.health <= 0) {
+                        this.enemies.remove(closestEnemy);
+                    }
+                }
+            }
         } else {
 //            System.out.println("Enemy delays");
             this.enemyDelay--;
@@ -214,6 +237,12 @@ public class SimulationLevel {
 //                System.out.println("Xpos " + currentTurret.component.xPos + " Ypos " + currentTurret.component.yPos);
             }
         }
+    }
+
+    private int getDistanceBetween(int x1,int y1, int x2, int y2) {
+        int netX = x1 - x2;
+        int netY = y1 - y2;
+        return (int) Math.ceil(Math.sqrt(Math.pow(netX,2)+Math.pow(netY,2)));
     }
 
     public boolean levelFinished() {

@@ -6,6 +6,8 @@ import Visuals.VisualShape;
 import java.awt.*;
 
 public class Turret extends Actor{
+    public int range = 200;
+    public int damage = 20;
     public Turret() {
         this.component = new VisualComponent();
         this.size = 50;

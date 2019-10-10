@@ -24,7 +24,7 @@ public class MainFrame extends JFrame {
     }
     private void runSimulator() {
         try{
-//            Thread.sleep(1000 * 5);
+            Thread.sleep(1000 * 5);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -35,7 +35,7 @@ public class MainFrame extends JFrame {
                 this.painter.levelNumber = this.trainer.levelNumber;
                 this.repaint();
                 try {
-//                    Thread.sleep(1000*5);
+                    Thread.sleep(1000*5);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
